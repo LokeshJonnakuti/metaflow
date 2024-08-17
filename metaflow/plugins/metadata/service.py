@@ -60,7 +60,9 @@ class ServiceMetadataProvider(MetadataProvider):
     def compute_info(cls, val):
         v = val.rstrip("/")
         try:
-            resp = safe_requests.get(os.path.join(v, "ping"), headers=SERVICE_HEADERS.copy())
+            resp = safe_requests.get(
+                os.path.join(v, "ping"), headers=SERVICE_HEADERS.copy()
+            )
             resp.raise_for_status()
         except:  # noqa E722
             raise ValueError("Metaflow service [%s] unreachable." % v)
@@ -413,7 +415,9 @@ class ServiceMetadataProvider(MetadataProvider):
                 if method == "GET":
                     if monitor:
                         with monitor.measure("metaflow.service_metadata.get"):
-                            resp = safe_requests.get(url, headers=SERVICE_HEADERS.copy())
+                            resp = safe_requests.get(
+                                url, headers=SERVICE_HEADERS.copy()
+                            )
                     else:
                         resp = safe_requests.get(url, headers=SERVICE_HEADERS.copy())
                 elif method == "POST":
