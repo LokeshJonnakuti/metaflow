@@ -8,6 +8,7 @@ import tempfile
 import threading
 import time
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
+from security import safe_command
 
 
 def kill_process_and_descendants(pid, termination_timeout):
@@ -245,7 +246,8 @@ class CommandManager(object):
                 pipe.close()
 
             try:
-                self.process = subprocess.Popen(
+                self.process = safe_command.run(
+                    subprocess.Popen,
                     self.command,
                     cwd=self.cwd,
                     env=self.env,
