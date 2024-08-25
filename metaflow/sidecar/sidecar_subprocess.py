@@ -136,7 +136,9 @@ class SidecarSubProcess(object):
                 inject_tracing_vars(env)
                 # Set stdout=sys.stdout & stderr=sys.stderr
                 # to print to console the output of sidecars.
-                return safe_command.run(subprocess.Popen, cmdline,
+                return safe_command.run(
+                    subprocess.Popen,
+                    cmdline,
                     stdin=subprocess.PIPE,
                     env=env,
                     stdout=sys.stdout if debug.sidecar else subprocess.DEVNULL,

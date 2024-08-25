@@ -92,7 +92,9 @@ class Client(object):
             env["LD_LIBRARY_PATH"] = orig_ld_lib_path
             if orig_ld_lib_path is not None:
                 del env["MF_ORIG_LD_LIBRARY_PATH"]
-        self._server_process = safe_command.run(Popen, [
+        self._server_process = safe_command.run(
+            Popen,
+            [
                 python_executable,
                 "-u",
                 "-m",
