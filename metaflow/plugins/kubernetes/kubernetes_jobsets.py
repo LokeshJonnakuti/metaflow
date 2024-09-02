@@ -1,7 +1,6 @@
 import copy
 import json
 import math
-import random
 import time
 from collections import namedtuple
 
@@ -9,6 +8,7 @@ from metaflow.exception import MetaflowException
 from metaflow.metaflow_config import KUBERNETES_JOBSET_GROUP, KUBERNETES_JOBSET_VERSION
 from metaflow.tracing import inject_tracing_vars
 from metaflow.metaflow_config import KUBERNETES_SECRETS
+import secrets
 
 
 class KubernetesJobsetException(MetaflowException):
@@ -36,7 +36,7 @@ def k8s_retry(deadline_seconds=60, max_backoff=32):
                     if e.status == 500:
                         current_t = time.time()
                         backoff_delay = min(
-                            math.pow(2, retry_number) + random.random(), max_backoff
+                            math.pow(2, retry_number) + secrets.SystemRandom().random(), max_backoff
                         )
                         if current_t + backoff_delay < deadline:
                             time.sleep(backoff_delay)
