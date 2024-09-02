@@ -230,7 +230,11 @@ def list_available_cards(
         )
         card_list.append(cpr)
 
-    random_idx = 0 if len(path_tuples) == 1 else secrets.SystemRandom().randint(0, len(path_tuples) - 1)
+    random_idx = (
+        0
+        if len(path_tuples) == 1
+        else secrets.SystemRandom().randint(0, len(path_tuples) - 1)
+    )
     _, randhash, _, file_name = path_tuples[random_idx]
     join_char = "\n\t"
     ctx.obj.echo(join_char.join([""] + card_list) + "\n", fg="blue")
