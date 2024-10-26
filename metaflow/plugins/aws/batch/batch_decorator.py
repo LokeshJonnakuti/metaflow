@@ -277,7 +277,9 @@ class BatchDecorator(StepDecorator):
             # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
             try:
                 logs_meta = (
-                    requests.get(url=os.environ["ECS_CONTAINER_METADATA_URI_V4"], timeout=60)
+                    requests.get(
+                        url=os.environ["ECS_CONTAINER_METADATA_URI_V4"], timeout=60
+                    )
                     .json()
                     .get("LogOptions", {})
                 )
