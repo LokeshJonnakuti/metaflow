@@ -6,6 +6,7 @@ from metaflow.metadata import MetaDatum
 from metaflow.metaflow_current import current, Parallel
 import os
 import sys
+from security import safe_command
 
 
 class ParallelDecorator(StepDecorator):
@@ -209,7 +210,7 @@ def _local_multinode_control_task_step_func(
 
         cmd = cli_args.step_command(executable, script, step_name, step_kwargs=kwargs)
 
-        p = subprocess.Popen(cmd)
+        p = safe_command.run(subprocess.Popen, cmd)
         subprocesses.append(p)
 
     flow._control_mapper_tasks = [
