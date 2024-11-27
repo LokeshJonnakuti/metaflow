@@ -1546,7 +1546,9 @@ class Worker(object):
         # print('running', args)
         cmdline = args.get_args()
         debug.subcommand_exec(cmdline)
-        return safe_command.run(subprocess.Popen, cmdline,
+        return safe_command.run(
+            subprocess.Popen,
+            cmdline,
             env=env,
             bufsize=1,
             stdin=subprocess.PIPE,

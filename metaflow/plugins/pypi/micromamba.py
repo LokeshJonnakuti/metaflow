@@ -281,10 +281,14 @@ def _install_micromamba(installation_location):
     # shouldn't be much of a problem in today's world.
     platform = conda_platform()
     try:
-        safe_command.run(subprocess.Popen, f"mkdir -p {installation_location}", shell=True).wait()
+        safe_command.run(
+            subprocess.Popen, f"mkdir -p {installation_location}", shell=True
+        ).wait()
         # https://mamba.readthedocs.io/en/latest/micromamba-installation.html#manual-installation
         # requires bzip2
-        result = safe_command.run(subprocess.Popen, f"curl -Ls https://micro.mamba.pm/api/micromamba/{platform}/1.5.7 | tar -xvj -C {installation_location} bin/micromamba",
+        result = safe_command.run(
+            subprocess.Popen,
+            f"curl -Ls https://micro.mamba.pm/api/micromamba/{platform}/1.5.7 | tar -xvj -C {installation_location} bin/micromamba",
             shell=True,
             stderr=subprocess.PIPE,
             stdout=subprocess.PIPE,

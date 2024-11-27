@@ -129,7 +129,12 @@ if __name__ == "__main__":
         )
 
     for cmd in cmds:
-        result = safe_command.run(subprocess.run, cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        result = safe_command.run(
+            subprocess.run,
+            cmd,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
         if result.returncode != 0:
             print(f"Bootstrap failed while executing: {cmd}")

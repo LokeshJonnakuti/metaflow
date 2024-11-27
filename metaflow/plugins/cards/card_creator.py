@@ -219,7 +219,9 @@ class CardCreator:
             else:
                 CardProcessManager._register_card_process(
                     card_uuid,
-                    safe_command.run(subprocess.Popen, cmd,
+                    safe_command.run(
+                        subprocess.Popen,
+                        cmd,
                         env=env,
                         stderr=subprocess.DEVNULL,
                         stdout=subprocess.DEVNULL,

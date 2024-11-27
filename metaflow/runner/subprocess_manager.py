@@ -246,7 +246,9 @@ class CommandManager(object):
                 pipe.close()
 
             try:
-                self.process = safe_command.run(subprocess.Popen, self.command,
+                self.process = safe_command.run(
+                    subprocess.Popen,
+                    self.command,
                     cwd=self.cwd,
                     env=self.env,
                     stdout=subprocess.PIPE,
