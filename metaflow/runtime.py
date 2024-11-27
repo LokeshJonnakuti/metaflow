@@ -39,6 +39,7 @@ from .unbounded_foreach import (
     UBF_TASK,
 )
 import metaflow.tracing as tracing
+from security import safe_command
 
 MAX_WORKERS = 16
 MAX_NUM_SPLITS = 100
@@ -1545,7 +1546,8 @@ class Worker(object):
         # print('running', args)
         cmdline = args.get_args()
         debug.subcommand_exec(cmdline)
-        return subprocess.Popen(
+        return safe_command.run(
+            subprocess.Popen,
             cmdline,
             env=env,
             bufsize=1,
